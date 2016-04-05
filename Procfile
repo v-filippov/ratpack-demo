@@ -1,0 +1,1 @@
+web: build/install/ratpack-demo/bin/ratpack-demo
