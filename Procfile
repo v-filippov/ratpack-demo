@@ -1,1 +1,1 @@
-web: build/install/ratpack-demo/bin/ratpack-demo
+web: build/install/ratpack-demo-vf/bin/ratpack-demo-vf
