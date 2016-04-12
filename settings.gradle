@@ -1,1 +1,2 @@
+include ":db"
 rootProject.name = "ratpack-demo-vf"
