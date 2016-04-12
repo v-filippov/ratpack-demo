@@ -1,6 +1,6 @@
 buildscript {
     dependencies {
-        classpath 'postgresql:postgresql:9.2-1002.jdbc4'
+        classpath 'org.postgresql:postgresql:9.4-1205-jdbc42'
     }
 }
 
@@ -12,7 +12,7 @@ plugins {
 flyway {
     url = 'jdbc:postgresql://localhost:5432/shopdb'
     user = 'shop'
-    password = '<placeholder>'
+    password = 'shoppsw'
     schemas = ['shop']
 }
 
