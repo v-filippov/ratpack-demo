@@ -19,16 +19,19 @@ repositories {
 }
 
 dependencies {
+    // database
     compile ratpack.dependency("hikari")
     compile 'org.postgresql:postgresql:9.4-1205-jdbc42'
 
-    compile ratpack.dependency('spring-boot')
-
+    // logging
     runtime "org.slf4j:slf4j-simple:1.7.12"
 
-// Testing
+    // RxJava integration
+    compile ratpack.dependency("rx")
 
-//    testRuntime "io.ratpack:ratpack-test:1.2.0"
+    // testing
+
+    //    testRuntime "io.ratpack:ratpack-test:1.2.0"
     testCompile "org.spockframework:spock-core:1.0-groovy-2.4", {
         exclude module: "groovy-all"
     }

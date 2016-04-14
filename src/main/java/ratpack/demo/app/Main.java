@@ -1,6 +1,5 @@
 package ratpack.demo.app;
 
-import com.google.common.reflect.TypeToken;
 import com.zaxxer.hikari.HikariConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,21 +7,15 @@ import ratpack.demo.app.chain.product.ProductChain;
 import ratpack.demo.app.handler.HandlerInsertExample;
 import ratpack.demo.app.module.PresentationModule;
 import ratpack.demo.app.module.ServiceModule;
-import ratpack.demo.app.spring.conf.SpringConfig;
 import ratpack.func.Function;
 import ratpack.groovy.sql.SqlModule;
 import ratpack.guice.Guice;
 import ratpack.handling.RequestLogger;
 import ratpack.hikari.HikariModule;
 import ratpack.registry.Registry;
-import ratpack.registry.RegistryBacking;
-import ratpack.registry.RegistryBuilder;
-import ratpack.registry.RegistrySpec;
 import ratpack.server.BaseDir;
 import ratpack.server.RatpackServer;
 import ratpack.server.ServerConfig;
-
-import static ratpack.spring.Spring.spring;
 
 /**
  * Created by Vladimir_Filippov on 3/23/2016.
@@ -39,8 +32,6 @@ public class Main {
                 .props("postgres.properties")
                 .require("/postgres", HikariConfig.class)
                 .build();
-
-        final Registry springRegistry = spring(SpringConfig.class);
         final Function<Registry, Registry> registry =
                 Guice.registry(r -> {
                     r.moduleConfig(HikariModule.class, serverConfig.get(HikariConfig.class));
@@ -48,9 +39,6 @@ public class Main {
                     r.module(ServiceModule.class);
                     r.module(PresentationModule.class);
                 });
-
-        Registry r = Registry.empty();
-        registry.apply(r.join(springRegistry));
         RatpackServer.start(server -> server
                         .registry(registry)
                         .serverConfig(serverConfig)
