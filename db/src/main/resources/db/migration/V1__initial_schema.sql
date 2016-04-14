@@ -5,3 +5,5 @@
 );
 
 COMMENT ON TABLE product IS 'Contains info about a product';
+
+GRANT SELECT, UPDATE, INSERT ON product TO shop_user;

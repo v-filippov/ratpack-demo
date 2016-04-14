@@ -1,6 +1,6 @@
 ﻿
 
-CREATE USER shop WITH password '<placeholder>';
+CREATE USER shop WITH password 'shoppsw';
 
 CREATE DATABASE shopdb
   WITH OWNER = shop
@@ -14,3 +14,6 @@ CREATE DATABASE shopdb
 
 CREATE SCHEMA AUTHORIZATION shop; -- schema shop for user shop
 
+CREATE USER shop_user WITH password 'shopuserpsw';
+
+GRANT USAGE ON SCHEMA shop TO shop_user;

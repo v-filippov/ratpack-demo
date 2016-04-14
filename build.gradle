@@ -5,6 +5,7 @@ buildscript {
     dependencies {
         classpath "io.ratpack:ratpack-gradle:1.2.0"
         classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+        classpath 'org.postgresql:postgresql:9.4-1205-jdbc42'
     }
 }
 
@@ -18,13 +19,21 @@ repositories {
 }
 
 dependencies {
+    compile ratpack.dependency("hikari")
+    compile 'org.postgresql:postgresql:9.4-1205-jdbc42'
+
+    compile ratpack.dependency('spring-boot')
+
     runtime "org.slf4j:slf4j-simple:1.7.12"
+
+// Testing
+
 //    testRuntime "io.ratpack:ratpack-test:1.2.0"
     testCompile "org.spockframework:spock-core:1.0-groovy-2.4", {
         exclude module: "groovy-all"
     }
 }
-mainClassName = "ratpack.demo.app.Main"
+//mainClassName = "ratpack.demo.app.Main"
 
 idea {
     project {
