@@ -21,6 +21,6 @@ class ProductDAO {
     }
 
     List<Product> findAll() {
-        sql.rows(SELECT_ALL_PRODUCTS).collect {mapProduct(it)}
+        sql.rows(SELECT_ALL_PRODUCTS).collect {MAP_PRODUCT(it)}
     }
 }
