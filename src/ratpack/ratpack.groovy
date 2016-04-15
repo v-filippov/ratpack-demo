@@ -10,10 +10,10 @@ import ratpack.demo.store.module.PresentationModule
 import ratpack.demo.store.module.ServiceModule
 import ratpack.groovy.sql.SqlModule
 import ratpack.hikari.HikariModule
+import ratpack.rx.RxRatpack
 import ratpack.server.BaseDir
 import ratpack.server.Service
 import ratpack.server.StartEvent
-import ratpack.rx.RxRatpack
 
 import static ratpack.groovy.Groovy.ratpack
 
@@ -22,7 +22,14 @@ ratpack {
 
     serverConfig {
         baseDir(BaseDir.find())
-        props("postgres.properties")
+        def jdbcUrl = System.getenv('JDBC_DATABASE_URL')
+        if (jdbcUrl) {
+            LOG.info('JDBC_DATABASE_URL is provided, using it to configure the datasource')
+            props(['postgres.jdbcUrl': jdbcUrl])
+        } else {
+            LOG.info('Using postgres.properties to configure the datasource')
+            props("postgres.properties")
+        }
         require("/postgres", HikariConfig)
     }
 
