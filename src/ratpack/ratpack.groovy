@@ -25,6 +25,7 @@ ratpack {
         def jdbcUrl = System.getenv('JDBC_DATABASE_URL')
         if (jdbcUrl) {
             LOG.info('JDBC_DATABASE_URL is provided, using it to configure the datasource')
+            jdbcUrl += '&currentSchema=shop' //TODO remove hard code
             props(['postgres.jdbcUrl': jdbcUrl])
         } else {
             LOG.info('Using postgres.properties to configure the datasource')
